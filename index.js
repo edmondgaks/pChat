@@ -3,7 +3,8 @@ const fs = require('fs');
 const results = [];
 
 function isHabitablePlanet(planet) {
-    return planet['kio_disposition'] === 'CONFIRMED';
+    return planet['kio_disposition'] === 'CONFIRMED'
+    && planet['kio_insol'] > 0.36 && planet['kio_insol'] < 1,11;
 }
 
 
