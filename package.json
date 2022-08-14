@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node server",
-    "dev" : "nodemon server"
+    "dev": "nodemon server"
   },
   "repository": {
     "type": "git",
@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/edmondgaks/pChat/issues"
   },
-  "homepage": "https://github.com/edmondgaks/pChat#readme"
+  "homepage": "https://github.com/edmondgaks/pChat#readme",
+  "dependencies": {
+    "socket.io": "^4.5.1"
+  }
 }
