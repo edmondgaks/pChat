@@ -5,7 +5,7 @@ const socketio = require('socket.io');
 const app = express();
 const server = http.createServer(app);
 const formatMessage = require('./utils/messages');
-
+const {userJoin,getCurrentUser} = require('./utils/messages');
 const io = socketio(server);
 
 app.use(express.static('public'));
@@ -14,13 +14,14 @@ const botName = 'Chatbot';
 
 io.on('connection', socket => {
     socket.on('joinRoom', ({ username, room }) => {
-        
+        const user = userJoin(socket.id,username,room);
+        socket.join(user.room);
         // console.log('New Ws connection');
         socket.emit('message', formatMessage(botName,'Welcome to the pChat'));
         // to the single client
         // Broadcast when a user connects
     
-        socket.broadcast.emit('message', 'A  user has joined the chat');
+        socket.broadcast.to(user.room).emit('message',formatMessage(botName, 'A  user has joined the chat'));
         // to all clients except the user who connects
     
         // io.emit()
