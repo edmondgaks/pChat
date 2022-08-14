@@ -18,6 +18,8 @@ chatForm.addEventListener('submit', (e) => {
     const msg = e.target.elements.msg.value;
     // Emit message to server
     socket.emit('chatmessage',msg);
+    // Clear input
+    e.target.elements.msg.value = '';
 });
 
 // Output message to DOM
