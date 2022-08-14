@@ -1,0 +1,20 @@
+{
+  "name": "pchat",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server",
+    "dev" : "nodemon server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/edmondgaks/pChat.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/edmondgaks/pChat/issues"
+  },
+  "homepage": "https://github.com/edmondgaks/pChat#readme"
+}
