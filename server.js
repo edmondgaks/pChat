@@ -15,7 +15,7 @@ io.on('connection', socket => {
     socket.emit('message', 'Welcome to the pChat');
     // to the single client
     // Broadcast when a user connects
-    
+
     socket.broadcast.emit('message', 'A  user has joined the chat');
     // to all clients except the user who connects
 
@@ -25,6 +25,10 @@ io.on('connection', socket => {
     // Runs when client disconnects
     socket.on('disconnect', () => {
         io.emit('message', 'A user has left the chat');
+    });
+    // Listen to chat message
+    socket.on('chatmessage', (msg) => {
+        io.emit('message', msg);
     })
 });
 
