@@ -20,6 +20,7 @@ chatForm.addEventListener('submit', (e) => {
     socket.emit('chatmessage',msg);
     // Clear input
     e.target.elements.msg.value = '';
+    e.target.elements.msg.focus();
 });
 
 // Output message to DOM
@@ -27,12 +28,12 @@ function outputMessage(message) {
     const div = document.createElement('div');
     div.classList.add('message');
     div.innerHTML = `<p class="meta">
-    Brad
-    <span>9:12pm</span>
+    ${message.username}
+    <span>${message.time}</span>
   </p>
-  <p class="text"> 
-    ${message}
+  <p class="text">
+    ${message.text}
   </p>`;
-  console.log(div);
+//   console.log(div);
   document.querySelector('.chat-messages').appendChild(div);
 }

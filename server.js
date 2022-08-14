@@ -4,15 +4,17 @@ const express = require('express');
 const socketio = require('socket.io');
 const app = express();
 const server = http.createServer(app);
+const formatMessage = require('./utils/messages');
 
 const io = socketio(server);
 
 app.use(express.static('public'));
 // or app.use(express.static(path.join(__dirname, 'public')));
+const botName = 'Chatbot';
 
 io.on('connection', socket => {
     console.log('New Ws connection');
-    socket.emit('message', 'Welcome to the pChat');
+    socket.emit('message', formatMessage(botName,'Welcome to the pChat'));
     // to the single client
     // Broadcast when a user connects
 
@@ -24,11 +26,11 @@ io.on('connection', socket => {
 
     // Runs when client disconnects
     socket.on('disconnect', () => {
-        io.emit('message', 'A user has left the chat');
+        io.emit('message', formatMessage(botName,'A user has left the chat'));
     });
     // Listen to chat message
     socket.on('chatmessage', (msg) => {
-        io.emit('message', msg);
+        io.emit('message', formatMessage('User',msg));
     })
 });
 
