@@ -5,7 +5,7 @@ const socketio = require('socket.io');
 const app = express();
 const server = http.createServer(app);
 const formatMessage = require('./utils/messages');
-const {userJoin,getCurrentUser} = require('./utils/messages');
+const {userJoin,getCurrentUser} = require('./utils/users');
 const io = socketio(server);
 
 app.use(express.static('public'));
@@ -21,7 +21,7 @@ io.on('connection', socket => {
         // to the single client
         // Broadcast when a user connects
     
-        socket.broadcast.to(user.room).emit('message',formatMessage(botName, 'A  user has joined the chat'));
+        socket.broadcast.to(user.room).emit('message',formatMessage(botName, `${user.username} has joined the chat`));
         // to all clients except the user who connects
     
         // io.emit()
@@ -31,7 +31,8 @@ io.on('connection', socket => {
     // Runs when client disconnects
     // Listen to chat message
     socket.on('chatmessage', (msg) => {
-        io.emit('message', formatMessage('User',msg));
+        const user = getCurrentUser(socket.id);
+        io.to(user.room).emit('message', formatMessage(user.username,msg));
     })
     socket.on('disconnect', () => {
         io.emit('message', formatMessage(botName,'A user has left the chat'));
