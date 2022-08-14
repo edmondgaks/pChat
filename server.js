@@ -12,7 +12,7 @@ app.use(express.static('public'));
 
 io.on('connection', socket => {
     console.log('New Ws connection');
-})
+});
 
 const PORT = process.env.PORT || 5000;
 
